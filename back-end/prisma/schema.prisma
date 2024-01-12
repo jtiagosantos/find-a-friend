@@ -37,8 +37,8 @@ model Pet {
   photos                  PetPhoto[]
   requirementsForAdoption RequirementsForAdoption[]
 
-  Organization   Organization? @relation(fields: [organizationId], references: [id])
-  organizationId String        @map("organization_id")
+  Organization   Organization @relation(fields: [organizationId], references: [id])
+  organizationId String       @map("organization_id")
 
   @@map("pets")
 }
