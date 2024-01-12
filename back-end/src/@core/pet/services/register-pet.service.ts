@@ -26,6 +26,7 @@ export class RegisterPetService {
             data: input.requirementsForAdoption.map((requirement) => ({ requirement })),
           },
         },
+        isAvailable: input.isAvailable,
         organizationId: input.organizationId,
       },
     });

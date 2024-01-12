@@ -8,6 +8,7 @@ import {
   IsEnum,
   IsArray,
   ArrayNotEmpty,
+  IsBoolean,
 } from 'class-validator';
 import { Species } from '../enums/species.enum';
 import { Size } from '../enums/size.enum';
@@ -50,4 +51,7 @@ export class RegisterPetDTO {
   @IsArray()
   @IsString({ each: true, message: 'Each element of the array must be a string' })
   requirementsForAdoption: Array<string>;
+
+  @IsBoolean()
+  isAvailable: boolean;
 }

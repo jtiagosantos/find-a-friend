@@ -13,4 +13,5 @@ export interface RegisterPetInput {
   photos: Array<string>;
   requirementsForAdoption: Array<string>;
   organizationId: string;
+  isAvailable: boolean;
 }
