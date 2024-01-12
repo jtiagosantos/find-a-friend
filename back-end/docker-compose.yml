@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  postgre:
+    image: bitnami/postgresql
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      - POSTGRESQL_USERNAME=postgre
+      - POSTGRESQL_PASSWORD=postgre
+      - POSTGRESQL_DATABASE=find_a_friend
