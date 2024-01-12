@@ -12,7 +12,7 @@ export class HashingService {
   }
 
   public compare(password: string, hash: string) {
-    const isMatch = bcrypt.compare(password, hash);
+    const isMatch = bcrypt.compareSync(password, hash);
 
     return isMatch;
   }
