@@ -38,7 +38,7 @@ model Pet {
   photos                  PetPhoto[]
   requirementsForAdoption RequirementsForAdoption[]
 
-  organization   Organization @relation(fields: [organizationId], references: [id])
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   organizationId String       @map("organization_id")
 
   @@map("pets")
@@ -48,7 +48,7 @@ model PetPhoto {
   id     String @id @default(cuid())
   source String
 
-  pet   Pet    @relation(fields: [petId], references: [id])
+  pet   Pet    @relation(fields: [petId], references: [id], onDelete: Cascade)
   petId String @map("pet_id")
 
   @@map("pet_photos")
@@ -58,7 +58,7 @@ model RequirementsForAdoption {
   id          String @id @default(cuid())
   requirement String
 
-  pet   Pet    @relation(fields: [petId], references: [id])
+  pet   Pet    @relation(fields: [petId], references: [id], onDelete: Cascade)
   petId String @map("pet_id")
 
   @@map("requirements_for_adoption")
