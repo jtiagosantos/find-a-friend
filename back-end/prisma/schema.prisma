@@ -33,6 +33,7 @@ model Pet {
   energy          Int
   size            Size
   dependenceLevel DependenceLevel
+  isAvailable     Boolean         @map("is_available")
 
   photos                  PetPhoto[]
   requirementsForAdoption RequirementsForAdoption[]
