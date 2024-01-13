@@ -13,6 +13,18 @@ export class GetPetService {
       },
       include: {
         organization: input.organization,
+        photos: {
+          select: {
+            id: true,
+            source: true,
+          },
+        },
+        requirementsForAdoption: {
+          select: {
+            id: true,
+            requirement: true,
+          },
+        },
       },
     });
 
