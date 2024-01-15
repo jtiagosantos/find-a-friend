@@ -4,6 +4,7 @@ import { FindPetsQueryParamsDTO } from './dtos/find-pets-query-params.dto';
 import { RegisterPetService } from './services/register-pet.service';
 import { GetPetService } from './services/get-pet.service';
 import { FindPetsService } from './services/find-pets.service';
+import { FindPetsByOrganizationService } from './services/find-pets-by-organization.service';
 import { Organization } from '../organization/decorators/organization.decorator';
 import { OrganizationData } from '../organization/types/organization-data.type';
 import { AuthGuard } from 'src/services/auth/auth.guard';
@@ -15,6 +16,7 @@ export class PetController {
     private readonly registerPetService: RegisterPetService,
     private readonly getPetService: GetPetService,
     private readonly findPetsService: FindPetsService,
+    private readonly findPetsByOrganization: FindPetsByOrganizationService,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -63,6 +65,14 @@ export class PetController {
         city: queryParams.city,
       },
     });
+
+    return pets;
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('/organization/:id')
+  public async findByOrganization(@Param('id') id: string) {
+    const pets = await this.findPetsByOrganization.execute({ organizationId: id });
 
     return pets;
   }
