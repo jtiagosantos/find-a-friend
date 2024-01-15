@@ -1,4 +1,5 @@
 import { IsString, IsNotEmpty, IsEmail, MinLength, IsPhoneNumber } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class RegisterOrganizationDTO {
   @IsString()
@@ -34,9 +35,11 @@ export class RegisterOrganizationDTO {
 
   @IsString()
   @IsNotEmpty({ message: 'city must be not an empty field' })
+  @Transform(({ value }) => value.toLowerCase())
   city: string;
 
   @IsString()
   @IsNotEmpty({ message: 'state must be not an empty field' })
+  @Transform(({ value }) => value.toLowerCase())
   state: string;
 }
