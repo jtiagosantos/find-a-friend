@@ -1,10 +1,20 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { RegisterPetDTO } from './dtos/register-pet.dto';
 import { FindPetsQueryParamsDTO } from './dtos/find-pets-query-params.dto';
 import { RegisterPetService } from './services/register-pet.service';
 import { GetPetService } from './services/get-pet.service';
 import { FindPetsService } from './services/find-pets.service';
 import { FindPetsByOrganizationService } from './services/find-pets-by-organization.service';
+import { DeletePetService } from './services/delete-pet.service';
 import { Organization } from '../organization/decorators/organization.decorator';
 import { OrganizationData } from '../organization/types/organization-data.type';
 import { AuthGuard } from 'src/services/auth/auth.guard';
@@ -17,6 +27,7 @@ export class PetController {
     private readonly getPetService: GetPetService,
     private readonly findPetsService: FindPetsService,
     private readonly findPetsByOrganization: FindPetsByOrganizationService,
+    private readonly deletePetService: DeletePetService,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -75,5 +86,17 @@ export class PetController {
     const pets = await this.findPetsByOrganization.execute({ organizationId: id });
 
     return pets;
+  }
+
+  @UseGuards(AuthGuard)
+  @Delete(':id')
+  public async delete(@Param('id') id: string) {
+    const PetExists = await this.getPetService.execute({ id });
+
+    if (!PetExists) {
+      throw new PetNotFoundException();
+    }
+
+    await this.deletePetService.execute({ id });
   }
 }

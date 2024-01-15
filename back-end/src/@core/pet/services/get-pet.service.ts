@@ -12,7 +12,7 @@ export class GetPetService {
         id: input.id,
       },
       include: {
-        organization: input.organization,
+        organization: !!input.organization,
         photos: {
           select: {
             id: true,
