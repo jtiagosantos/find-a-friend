@@ -1,17 +1,20 @@
 import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { RegisterPetDTO } from './dtos/register-pet.dto';
+import { FindPetsQueryParamsDTO } from './dtos/find-pets-query-params.dto';
 import { RegisterPetService } from './services/register-pet.service';
 import { GetPetService } from './services/get-pet.service';
+import { FindPetsService } from './services/find-pets.service';
 import { Organization } from '../organization/decorators/organization.decorator';
 import { OrganizationData } from '../organization/types/organization-data.type';
 import { AuthGuard } from 'src/services/auth/auth.guard';
 import { PetNotFoundException } from './exceptions/pet-not-found.exception';
 
-@Controller('pet')
+@Controller('pets')
 export class PetController {
   constructor(
     private readonly registerPetService: RegisterPetService,
     private readonly getPetService: GetPetService,
+    private readonly findPetsService: FindPetsService,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -46,5 +49,21 @@ export class PetController {
       ...pet,
       organizationId: undefined,
     };
+  }
+
+  @Get('/')
+  public async find(@Query() queryParams: FindPetsQueryParamsDTO) {
+    const pets = await this.findPetsService.execute({
+      filters: {
+        age: queryParams.age,
+        energy: queryParams.energy,
+        species: queryParams.species,
+        size: queryParams.size,
+        dependenceLevel: queryParams.dependenceLevel,
+        city: queryParams.city,
+      },
+    });
+
+    return pets;
   }
 }
