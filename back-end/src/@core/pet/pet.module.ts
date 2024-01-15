@@ -20,5 +20,6 @@ import { AuthModule } from 'src/services/auth/auth.module';
     UpdatePetService,
   ],
   imports: [PrismaModule, AuthModule],
+  exports: [GetPetService],
 })
 export class PetModule {}
