@@ -42,6 +42,16 @@ export class PetController {
     });
   }
 
+  @UseGuards(AuthGuard)
+  @Get('/organization')
+  public async findByOrganization(@Organization() organization: OrganizationData) {
+    const pets = await this.findPetsByOrganization.execute({
+      organizationId: organization.id,
+    });
+
+    return pets;
+  }
+
   @Get(':id')
   public async getPet(
     @Param('id') id: string,
@@ -81,14 +91,6 @@ export class PetController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('/organization/:id')
-  public async findByOrganization(@Param('id') id: string) {
-    const pets = await this.findPetsByOrganization.execute({ organizationId: id });
-
-    return pets;
-  }
-
-  @UseGuards(AuthGuard)
   @Delete(':id')
   public async delete(@Param('id') id: string) {
     const PetExists = await this.getPetService.execute({ id });
@@ -96,6 +98,8 @@ export class PetController {
     if (!PetExists) {
       throw new PetNotFoundException();
     }
+
+    //TODO: validate if the give pet id is from the authenticated organization
 
     await this.deletePetService.execute({ id });
   }

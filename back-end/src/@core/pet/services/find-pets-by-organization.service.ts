@@ -8,6 +8,17 @@ export class FindPetsByOrganizationService {
 
   public async execute(input: FindPetsByOrganizationInput) {
     const pets = await this.prismaService.pet.findMany({
+      select: {
+        name: true,
+        about: true,
+        age: true,
+        species: true,
+        energy: true,
+        size: true,
+        dependenceLevel: true,
+        photos: true,
+        requirementsForAdoption: true,
+      },
       where: {
         organizationId: input.organizationId,
       },
