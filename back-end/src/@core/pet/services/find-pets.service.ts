@@ -11,6 +11,7 @@ export class FindPetsService {
 
     const pets = await this.prismaService.pet.findMany({
       select: {
+        id: true,
         name: true,
         about: true,
         age: true,
