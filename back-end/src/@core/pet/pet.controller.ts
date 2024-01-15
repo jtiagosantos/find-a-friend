@@ -5,16 +5,19 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
   UseGuards,
 } from '@nestjs/common';
 import { RegisterPetDTO } from './dtos/register-pet.dto';
 import { FindPetsQueryParamsDTO } from './dtos/find-pets-query-params.dto';
+import { UpdatePetDTO } from './dtos/update-pet.dto';
 import { RegisterPetService } from './services/register-pet.service';
 import { GetPetService } from './services/get-pet.service';
 import { FindPetsService } from './services/find-pets.service';
 import { FindPetsByOrganizationService } from './services/find-pets-by-organization.service';
 import { DeletePetService } from './services/delete-pet.service';
+import { UpdatePetService } from './services/update-pet.service';
 import { Organization } from '../organization/decorators/organization.decorator';
 import { OrganizationData } from '../organization/types/organization-data.type';
 import { AuthGuard } from 'src/services/auth/auth.guard';
@@ -29,6 +32,7 @@ export class PetController {
     private readonly findPetsService: FindPetsService,
     private readonly findPetsByOrganization: FindPetsByOrganizationService,
     private readonly deletePetService: DeletePetService,
+    private readonly updatePetService: UpdatePetService,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -108,5 +112,28 @@ export class PetController {
     }
 
     await this.deletePetService.execute({ id });
+  }
+
+  @UseGuards(AuthGuard)
+  @Put(':id')
+  public async update(
+    @Body() body: UpdatePetDTO,
+    @Param('id') id: string,
+    @Organization() organization: OrganizationData,
+  ) {
+    const pet = await this.getPetService.execute({ id });
+
+    if (!pet) {
+      throw new PetNotFoundException();
+    }
+
+    if (pet.organizationId !== organization.id) {
+      throw new PermissionDeniedException();
+    }
+
+    await this.updatePetService.execute({
+      id,
+      ...body,
+    });
   }
 }
