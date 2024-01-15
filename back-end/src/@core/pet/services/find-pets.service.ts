@@ -30,6 +30,7 @@ export class FindPetsService {
         organization: {
           city,
         },
+        isAvailable: true,
       },
     });
 
