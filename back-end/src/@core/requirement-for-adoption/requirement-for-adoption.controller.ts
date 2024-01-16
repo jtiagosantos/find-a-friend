@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Param, Put, UseGuards } from '@nestjs/common';
 import { UpdatePetRequirementsForAdoptionDTO } from './dtos/update-pet-requirements-for-adoption.dto';
 import { GetPetService } from '../pet/services/get-pet.service';
 import { UpdatePetRequirementsForAdoptionService } from './services/update-pet-requirements-for-adoption.service';
@@ -17,6 +17,7 @@ export class RequirementForAdoptionController {
 
   @UseGuards(AuthGuard)
   @Put('/pet/:petId')
+  @HttpCode(204)
   public async update(
     @Organization() organization: OrganizationData,
     @Param('petId') petId: string,
