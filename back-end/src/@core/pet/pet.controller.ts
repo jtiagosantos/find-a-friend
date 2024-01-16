@@ -21,7 +21,7 @@ import { DeletePetService } from './services/delete-pet.service';
 import { UpdatePetService } from './services/update-pet.service';
 import { Organization } from '../organization/decorators/organization.decorator';
 import { OrganizationData } from '../organization/types/organization-data.type';
-import { AuthGuard } from 'src/services/auth/auth.guard';
+import { AuthGuard } from '../../services/auth/auth.guard';
 import { PetNotFoundException } from './exceptions/pet-not-found.exception';
 import { PermissionDeniedException } from './exceptions/permission-denied.exception';
 

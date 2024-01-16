@@ -3,8 +3,8 @@ import { RegisterOrganizationDTO } from './dtos/register-organization.dto';
 import { AuthenticateOrganizationDTO } from './dtos/authenticate-organization.dto';
 import { RegisterOrganizationService } from './services/register-organization.service';
 import { GetOrganizationService } from './services/get-organization.service';
-import { HashingService } from 'src/services/hashing/hashing.service';
-import { AuthService } from 'src/services/auth/auth.service';
+import { HashingService } from '../../services/hashing/hashing.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { OrganizationAlreadyExistsException } from './exceptions/organization-already-exists.exception';
 import { InvalidCredentialsException } from './exceptions/invalid-credentials.exception';
 
