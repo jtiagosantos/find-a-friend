@@ -46,6 +46,7 @@ export class RegisterPetDTO {
   @IsArray()
   @ArrayNotEmpty({ message: 'photos must be at least one element' })
   @IsString({ each: true, message: 'Each element of the array must be a string' })
+  @IsNotEmpty({ each: true, message: 'Each string of the array must be no empty' })
   photos: Array<string>;
 
   @IsArray()
