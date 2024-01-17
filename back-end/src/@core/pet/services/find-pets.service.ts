@@ -19,8 +19,18 @@ export class FindPetsService {
         energy: true,
         size: true,
         dependenceLevel: true,
-        photos: true,
-        requirementsForAdoption: true,
+        photos: {
+          select: {
+            id: true,
+            source: true,
+          },
+        },
+        requirementsForAdoption: {
+          select: {
+            id: true,
+            requirement: true,
+          },
+        },
       },
       where: {
         age,

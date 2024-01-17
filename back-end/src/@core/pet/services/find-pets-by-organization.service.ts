@@ -17,8 +17,18 @@ export class FindPetsByOrganizationService {
         energy: true,
         size: true,
         dependenceLevel: true,
-        photos: true,
-        requirementsForAdoption: true,
+        photos: {
+          select: {
+            id: true,
+            source: true,
+          },
+        },
+        requirementsForAdoption: {
+          select: {
+            id: true,
+            requirement: true,
+          },
+        },
       },
       where: {
         organizationId: input.organizationId,
