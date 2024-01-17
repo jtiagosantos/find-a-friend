@@ -93,7 +93,7 @@ export class PetController {
         species: queryParams.species,
         size: queryParams.size,
         dependenceLevel: queryParams.dependenceLevel,
-        city: queryParams.city,
+        city: queryParams.city?.toLowerCase(),
       },
     });
 
