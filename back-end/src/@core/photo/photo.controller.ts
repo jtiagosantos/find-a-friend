@@ -1,4 +1,12 @@
-import { Body, Controller, HttpCode, Param, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { UpdatePetPhotosDTO } from './dtos/update-pet-photos.dto';
 import { GetPetService } from '../pet/services/get-pet.service';
 import { UpdatePetPhotosService } from './services/update-pet-photos.service';
@@ -17,7 +25,7 @@ export class PhotoController {
 
   @UseGuards(AuthGuard)
   @Put('/pet/:petId')
-  @HttpCode(204)
+  @HttpCode(HttpStatus.NO_CONTENT)
   public async update(
     @Organization() organization: OrganizationData,
     @Param('petId') petId: string,

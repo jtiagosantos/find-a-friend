@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   HttpCode,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -38,7 +39,7 @@ export class PetController {
 
   @UseGuards(AuthGuard)
   @Post('/register')
-  @HttpCode(201)
+  @HttpCode(HttpStatus.CREATED)
   public async register(
     @Body() body: RegisterPetDTO,
     @Organization() organization: OrganizationData,
@@ -51,7 +52,7 @@ export class PetController {
 
   @UseGuards(AuthGuard)
   @Get('/organization')
-  @HttpCode(200)
+  @HttpCode(HttpStatus.OK)
   public async findByOrganization(@Organization() organization: OrganizationData) {
     const pets = await this.findPetsByOrganization.execute({
       organizationId: organization.id,
@@ -61,7 +62,7 @@ export class PetController {
   }
 
   @Get(':id')
-  @HttpCode(200)
+  @HttpCode(HttpStatus.OK)
   public async getPet(
     @Param('id') id: string,
     @Query('organization') organization: string,
@@ -84,7 +85,7 @@ export class PetController {
   }
 
   @Get('/')
-  @HttpCode(200)
+  @HttpCode(HttpStatus.OK)
   public async find(@Query() queryParams: FindPetsQueryParamsDTO) {
     const pets = await this.findPetsService.execute({
       filters: {
@@ -102,7 +103,7 @@ export class PetController {
 
   @UseGuards(AuthGuard)
   @Delete(':id')
-  @HttpCode(204)
+  @HttpCode(HttpStatus.NO_CONTENT)
   public async delete(
     @Param('id') id: string,
     @Organization() organization: OrganizationData,
@@ -122,7 +123,7 @@ export class PetController {
 
   @UseGuards(AuthGuard)
   @Put(':id')
-  @HttpCode(204)
+  @HttpCode(HttpStatus.NO_CONTENT)
   public async update(
     @Body() body: UpdatePetDTO,
     @Param('id') id: string,

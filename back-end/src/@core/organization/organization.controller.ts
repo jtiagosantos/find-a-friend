@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { RegisterOrganizationDTO } from './dtos/register-organization.dto';
 import { AuthenticateOrganizationDTO } from './dtos/authenticate-organization.dto';
 import { RegisterOrganizationService } from './services/register-organization.service';
@@ -18,7 +18,7 @@ export class OrganizationController {
   ) {}
 
   @Post('/register')
-  @HttpCode(201)
+  @HttpCode(HttpStatus.CREATED)
   public async register(@Body() body: RegisterOrganizationDTO) {
     const organizationExists = await this.getOrganizationService.execute({
       email: body.email,
@@ -35,7 +35,7 @@ export class OrganizationController {
   }
 
   @Post('/authenticate')
-  @HttpCode(200)
+  @HttpCode(HttpStatus.OK)
   public async authenticate(@Body() body: AuthenticateOrganizationDTO) {
     const organization = await this.getOrganizationService.execute({ email: body.email });
 
