@@ -129,4 +129,40 @@ suite('Photo Controller', () => {
       expect(putResponse.body.message).toEqual('Pet not found');
     });
   });
+
+  describe('[POST] /photos/upload/url', () => {
+    it('must be able to pre-sign a S3 URL', async () => {
+      const { token } = await createAndAuthenticateUser(app);
+
+      const putResponse = await request(app.getHttpServer())
+        .post('/photos/upload/url')
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          key: 'example.png',
+          contentType: 'image/png',
+        });
+
+      expect(putResponse.statusCode).toEqual(HttpStatus.CREATED);
+      expect(putResponse.body).toEqual({
+        url: expect.any(String),
+      });
+    });
+
+    it('must not be able to pre-sign a S3 URL with pending fields', async () => {
+      const { token } = await createAndAuthenticateUser(app);
+
+      const putResponse = await request(app.getHttpServer())
+        .post('/photos/upload/url')
+        .set('Authorization', `Bearer ${token}`)
+        .send({});
+
+      expect(putResponse.statusCode).toEqual(HttpStatus.BAD_REQUEST);
+      expect(putResponse.body.message).toEqual([
+        'key must be not an empty string',
+        'key must be a string',
+        'contentType must be not an empty string',
+        'contentType must be a string',
+      ]);
+    });
+  });
 });
