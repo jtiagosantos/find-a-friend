@@ -1,10 +1,21 @@
-import { Body, Controller, HttpCode, Param, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { UpdatePetPhotosDTO } from './dtos/update-pet-photos.dto';
+import { PreSignURLDTO } from './dtos/pre-sign-url.dto';
 import { GetPetService } from '../pet/services/get-pet.service';
 import { UpdatePetPhotosService } from './services/update-pet-photos.service';
+import { AWSS3Service } from '../../services/aws-s3/aws-s3.service';
 import { Organization } from '../organization/decorators/organization.decorator';
 import { OrganizationData } from '../organization/types/organization-data.type';
-import { AuthGuard } from 'src/services/auth/auth.guard';
+import { AuthGuard } from '../../services/auth/auth.guard';
 import { PetNotFoundException } from '../pet/exceptions/pet-not-found.exception';
 import { PermissionDeniedException } from './exceptions/permission-denied.exception';
 
@@ -13,11 +24,12 @@ export class PhotoController {
   constructor(
     private readonly getPetService: GetPetService,
     private readonly updatePetPhotosService: UpdatePetPhotosService,
+    private readonly awsS3Service: AWSS3Service,
   ) {}
 
   @UseGuards(AuthGuard)
   @Put('/pet/:petId')
-  @HttpCode(204)
+  @HttpCode(HttpStatus.NO_CONTENT)
   public async update(
     @Organization() organization: OrganizationData,
     @Param('petId') petId: string,
@@ -34,5 +46,16 @@ export class PhotoController {
     }
 
     await this.updatePetPhotosService.execute({ petId, photos: body.photos });
+  }
+
+  @UseGuards(AuthGuard)
+  @Post('/upload/url')
+  @HttpCode(HttpStatus.CREATED)
+  public async preSignURL(@Body() body: PreSignURLDTO) {
+    const url = await this.awsS3Service.preSignURL(body);
+
+    return {
+      url,
+    };
   }
 }

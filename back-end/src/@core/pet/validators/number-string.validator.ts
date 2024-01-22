@@ -1,12 +1,16 @@
-import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import {
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+  ValidationArguments,
+} from 'class-validator';
 
-@ValidatorConstraint({ name: 'idadeValida', async: false })
+@ValidatorConstraint({ name: 'NumberStringValidator', async: false })
 export class NumberStringValidator implements ValidatorConstraintInterface {
   validate(idade: number) {
     return !isNaN(idade);
   }
 
-  defaultMessage() {
-    return 'age query param must be a number';
+  defaultMessage(args: ValidationArguments) {
+    return `${args.property} query param must be a number`;
   }
 }

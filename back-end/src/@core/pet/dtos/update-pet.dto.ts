@@ -6,12 +6,13 @@ import {
   Min,
   Max,
   IsEnum,
-  IsBoolean,
   IsOptional,
+  Validate,
 } from 'class-validator';
 import { Species } from '../enums/species.enum';
 import { Size } from '../enums/size.enum';
 import { DependenceLevel } from '../enums/dependence-level.enum';
+import { OptionalBooleanValidator } from '../validators/optional-boolean.validator';
 
 export class UpdatePetDTO {
   @IsOptional()
@@ -49,7 +50,6 @@ export class UpdatePetDTO {
   @IsEnum(DependenceLevel, { message: 'dependenceLevel must be LOW or MEDIUM or HIGHT' })
   dependenceLevel: DependenceLevel;
 
-  @IsOptional()
-  @IsBoolean()
-  isAvailable: boolean;
+  @Validate(OptionalBooleanValidator)
+  isAvailable?: boolean;
 }

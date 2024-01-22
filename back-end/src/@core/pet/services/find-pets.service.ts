@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/services/database/prisma.service';
+import { PrismaService } from '../../../services/database/prisma.service';
 import { FindPetsInput } from '../inputs/find-pets.inputs';
 
 @Injectable()
@@ -19,8 +19,18 @@ export class FindPetsService {
         energy: true,
         size: true,
         dependenceLevel: true,
-        photos: true,
-        requirementsForAdoption: true,
+        photos: {
+          select: {
+            id: true,
+            source: true,
+          },
+        },
+        requirementsForAdoption: {
+          select: {
+            id: true,
+            requirement: true,
+          },
+        },
       },
       where: {
         age,

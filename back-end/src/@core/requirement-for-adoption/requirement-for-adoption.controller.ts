@@ -1,10 +1,18 @@
-import { Body, Controller, HttpCode, Param, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { UpdatePetRequirementsForAdoptionDTO } from './dtos/update-pet-requirements-for-adoption.dto';
 import { GetPetService } from '../pet/services/get-pet.service';
 import { UpdatePetRequirementsForAdoptionService } from './services/update-pet-requirements-for-adoption.service';
 import { Organization } from '../organization/decorators/organization.decorator';
 import { OrganizationData } from '../organization/types/organization-data.type';
-import { AuthGuard } from 'src/services/auth/auth.guard';
+import { AuthGuard } from '../../services/auth/auth.guard';
 import { PetNotFoundException } from '../pet/exceptions/pet-not-found.exception';
 import { PermissionDeniedException } from './exceptions/permission-denied.exception';
 
@@ -17,7 +25,7 @@ export class RequirementForAdoptionController {
 
   @UseGuards(AuthGuard)
   @Put('/pet/:petId')
-  @HttpCode(204)
+  @HttpCode(HttpStatus.NO_CONTENT)
   public async update(
     @Organization() organization: OrganizationData,
     @Param('petId') petId: string,

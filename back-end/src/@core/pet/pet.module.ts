@@ -6,8 +6,8 @@ import { FindPetsService } from './services/find-pets.service';
 import { DeletePetService } from './services/delete-pet.service';
 import { FindPetsByOrganizationService } from './services/find-pets-by-organization.service';
 import { UpdatePetService } from './services/update-pet.service';
-import { PrismaModule } from 'src/services/database/prisma.module';
-import { AuthModule } from 'src/services/auth/auth.module';
+import { PrismaModule } from '../../services/database/prisma.module';
+import { AuthModule } from '../../services/auth/auth.module';
 
 @Module({
   controllers: [PetController],
