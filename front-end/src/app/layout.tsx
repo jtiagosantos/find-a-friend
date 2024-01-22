@@ -1,4 +1,7 @@
 import './globals.css';
+import { Nunito } from 'next/font/google';
+
+const nunito = Nunito({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,
@@ -7,7 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body>{children}</body>
+      <body className={nunito.className}>{children}</body>
     </html>
   );
 }
