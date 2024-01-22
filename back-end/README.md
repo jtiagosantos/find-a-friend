@@ -1,0 +1,62 @@
+### Regras da Aplicação
+- [x] Deve ser possível cadastrar um pet (gato **ou** cachorro)
+- [x] Deve ser possível listar todos os pets **disponíveis** para adoção **em uma cidade**
+- [x] Deve ser possível filtrar pets por organização
+- [x] Deve ser possível filtrar pets por gato ou cachorro
+- [x] Deve ser possível filtrar pets por suas características
+  - [x] Idade
+  - [x] Nível de energia (1 - 5)
+  - [x] Porte do animal (Pequeno, Médio, Grande)
+  - [x] Nível de dependência (Baixo, Médio, Alto)
+- [x] Deve ser possível visualizar detalhes de um pet para adoção
+- [x] Deve ser possível se cadastrar como uma organização
+- [x] Deve ser possível fazer login como uma organização
+- [x] Deve ser possível que uma organização possa fazer as ações
+  - [x] Cadastrar um pet
+  - [x] Listar os pets exclusivos da organização
+  - [x] Atualizar as informações de um **pet**
+  - [x] Deletar um pet
+  - [x] Definir um pet como disponível/indisponível
+  - [x] Fazer login
+  - [x] Fazer cadastro
+  - [x] Fazer logout na conta
+- [x] Deve ser possível que um usuário comum possa fazer as ações
+  - [x] Visualizar detalhes de um pet para adoção
+  - [x] Aplicar filtros na busca por um pet
+- [x] Para cadastrar uma organização, serão necessários os dados
+  - [x] Nome do responsável (dono)
+  - [x] Nome da organização
+  - [x] Email
+  - [x] Senha (pelo menos 6 caracteres)
+  - [x] Telefone(whatsapp)
+  - [x] Endereço
+    - [x] CEP
+    - [x] Endereço
+    - [x] Cidade
+    - [x] Estado
+- [x] Para logar como uma organização, serão necessários os dados
+  - [x] Email
+  - [x] Senha
+- [x] Para cadastrar um pet, serão necessários os dados
+  - [x] Nome
+  - [x] Sobre (Mínimo de 20 caracteres)
+  - [x] Idade (0 - 20)
+  - [x] Gato ou cachorro
+  - [x] Nível de energia (1 - 5)
+  - [x] Porte do animal (Pequeno, Médio, Grande)
+  - [x] Nível de dependência (Baixo, Médio, Alto)
+  - [x] Fotos (Pelo menos 1 foto)
+  - [x] Requisitos para adoção (Não é obrigatório)
+
+### Regras de Negócio
+- [x] Para listar os pets, **obrigatoriamente** precisamos informar a cidade
+- [x] Uma organização **precisa** ter um endereço e um número de whatsapp
+- [x] Um pet deve estar ligado a uma organização
+- [x] O usuário que quer adotar, entrará em contato com a organização via whatsapp
+- [x] Para uma organização acessar a aplicação como admin, ela precisar estar logada
+- [x] Uma organização pode gerenciar/visualizar **apenas os seus pets**
+- [x] Um usuário comum não pode fazer nenhuma das ações destinadas apenas às organizações
+
+### Requisitos Técnicos
+- [x] A autenticação deve ser via JWT
+- [x] Deve ter testes E2E em todo o back-end
