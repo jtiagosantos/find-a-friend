@@ -7,7 +7,7 @@ import { Button } from '@/shared/components/button';
 import LogoImage from '@/shared/assets/images/logo.svg';
 import DogsImage from '@/shared/assets/images/dogs.png';
 
-export default function Home() {
+export default function SignInPage() {
   return (
     <main className="py-[80px] pl-[112px] flex gap-[136px]">
       <div
