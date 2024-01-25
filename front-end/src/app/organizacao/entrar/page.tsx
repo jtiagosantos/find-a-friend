@@ -41,7 +41,7 @@ export default function SignInPage() {
           <div className="mt-[60px] flex flex-col gap-5">
             <Button>Login</Button>
             <Link
-              href="/cadastrar"
+              href="/organizacao/cadastrar"
               className="text-[#0D3B66] text-[20px] font-extrabold py-5 w-full bg-[#F5F8FA] rounded-[20px] text-center">
               Cadastrar minha organização
             </Link>
