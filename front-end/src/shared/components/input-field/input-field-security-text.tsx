@@ -31,6 +31,7 @@ export const InputFieldSecurityText = forwardRef<
             rounded-[10px] 
             outline-[#0D3B66]
             bg-[#F5F8FA]
+            pr-14
         `,
           className,
         )}
