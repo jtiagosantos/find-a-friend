@@ -1,5 +1,4 @@
 import { twMerge } from 'tailwind-merge';
-import { ThreeDots } from 'react-loader-spinner';
 import type { FC, ComponentProps } from 'react';
 
 type ButtonProps = ComponentProps<'button'> & {
@@ -32,18 +31,7 @@ export const Button: FC<ButtonProps> = ({
         className,
       )}
       {...props}>
-      {isLoading ? (
-        <ThreeDots
-          height="30"
-          width="40"
-          radius="9"
-          color="#fff"
-          ariaLabel="three-dots-loading"
-          visible={true}
-        />
-      ) : (
-        <>{children}</>
-      )}
+      {isLoading ? 'Carregando...' : <>{children}</>}
     </button>
   );
 };
