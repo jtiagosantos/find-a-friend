@@ -48,7 +48,7 @@ export class OrganizationService {
       });
 
       setCookie(COOKIES_NAME.TOKEN, data.token, {
-        path: '/organization',
+        path: '/',
         maxAge: TIME.SEVEN_DAYS,
       });
     } catch (error) {
