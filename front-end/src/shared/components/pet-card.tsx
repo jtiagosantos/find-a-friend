@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import type { FC } from 'react';
 
-import PetFaceIcon from '@/shared/assets/icons/pet-face.svg';
+import PetFaceIcon from '@/shared/assets/icons/pet-face.png';
 
 type PetCardProps = {
   photo: string;
@@ -33,7 +33,7 @@ export const PetCard: FC<PetCardProps> = ({ photo, name, petFaceCardBgColor }) =
           style={{
             backgroundColor: petFaceCardBgColors[petFaceCardBgColor],
           }}>
-          <PetFaceIcon />
+          <Image src={PetFaceIcon.src} width={15} height={15} alt="" />
         </div>
       </div>
       <p className="font-bold text-[18px] text-[#0D3B66] text-center -translate-y-5 group-hover:text-white transition-all duration-300">
