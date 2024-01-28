@@ -21,11 +21,11 @@ export default function PetsPage() {
   });
 
   return (
-    <div>
+    <div className="p-6">
       <div className="flex items-center justify-between mb-10">
         <h1 className="text-2xl font-semibold text-[#0D3B66]">Seus Pets Cadastrados</h1>
         <Link
-          href="/pets/cadastrar"
+          href="/organizacao/pets/cadastrar"
           className="bg-[#0D3B66] text-white p-2 rounded-md flex items-center gap-1 w-fit pr-3">
           <PlusIcon />
           Cadastrar Pet
