@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'find-a-friend-app.s3.amazonaws.com',
+      },
+    ],
+  },
+
   async redirects() {
     return [
       {
