@@ -26,7 +26,7 @@ export default function SignInPage() {
     register,
     handleSubmit,
     setError,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<AuthenticateData>({
     resolver: zodResolver(authenticateSchema),
   });
@@ -75,7 +75,7 @@ export default function SignInPage() {
           )}
         </InputField.Root>
         <div className="mt-[60px] flex flex-col gap-5">
-          <Button>Login</Button>
+          <Button isLoading={isSubmitting}>Login</Button>
           <Link
             href="/organizacao/cadastrar"
             className="text-[#0D3B66] text-[20px] font-extrabold py-5 w-full bg-[#F5F8FA] rounded-[20px] text-center">
